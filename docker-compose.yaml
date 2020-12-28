@@ -1,0 +1,15 @@
+version: '3.0'
+
+services:
+  app:
+    build: .
+    ports:
+      - "9000:9000"
+    depends_on:
+      - "nats"
+
+
+  nats:
+    image: nats
+    ports:
+      - '4222:4222'

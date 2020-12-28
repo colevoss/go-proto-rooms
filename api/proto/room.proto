@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package room;
+
+option go_package = ".;pb";
+
+// import "google/protobuf/timestamp.proto";
+
+message RoomConnect {
+  string roomId = 1;
+  // string roomName = 4;
+  string userId = 2;
+  string name = 3;
+}
+
+message Room {
+  string id = 1;
+  int32 memberCount = 2;
+  int32 activeMemberCount = 3;
+  // string name = 2;
+}
+
+message RoomMember {
+  string userId = 1;
+  string name = 2;
+  bool present = 3;
+  // bool canOpenMic = 4;
+  // google.protobuf.Timestamp lastJoinedAt = 5;
+  // google.protobuf.Timestamp lastSeenAt = 6;
+}
+
+service RoomService {
+  rpc ConnectToRoom(RoomConnect) returns (stream Room) {}
+  rpc Members(RoomConnect) returns (stream RoomMember) {}
+}
